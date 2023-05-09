@@ -1,0 +1,39 @@
+{
+  "name": "@guerrap/use-fathom-client",
+  "version": "1.0.0",
+  "repository": "https://github.com/guerrap/use-fathom-client.git",
+  "author": "pg.guerrap@proton.me",
+  "license": "GPL-3.0-or-later",
+  "description": "This is an unofficial client implementation for Fathom analytics.",
+  "keywords": [
+    "use-fathom",
+    "analytics",
+    "fathom",
+    "client"
+  ],
+  "types": "./types/use-fathom-client.d.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "require": "./src/index.js"
+    }
+  },
+  "type": "module",
+  "scripts": {},
+  "bin": {
+    "prepare-fathom": "./src/scripts/sync-events.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "find-up": "^6.3.0",
+    "node-fetch": "^3.3.1",
+    "ora": "^6.3.0"
+  },
+  "files": [
+    "./src",
+    "./types"
+  ],
+  "engines": {
+    "node": ">=14.16"
+  }
+}
