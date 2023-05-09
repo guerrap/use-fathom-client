@@ -1,4 +1,4 @@
-declare module "@guerrap/use-fathom-client" {
+declare module "@guerrap/fathom-client" {
   export interface Window {
     fathom?: Fathom;
     __fathomCommandsQueue: FathomCommand[];

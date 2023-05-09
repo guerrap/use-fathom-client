@@ -17,7 +17,7 @@ With this package, developers can take advantage of the following key features:
 To install the package, run:
 
 ```sh
-npm install @guerrap/use-fathom-client
+npm install @guerrap/fathom-client
 ```
 
 ## Basic usage
@@ -25,7 +25,7 @@ npm install @guerrap/use-fathom-client
 Once installed, Fathom can initialized with the `FATOM_SITE_ID` (obtained by registering on Fathom) and with a configuration object that must include the Fathom's script location (it should be a CDN endpoint, more details [here](https://usefathom.com/docs/script/embed)). The `initialize` function supports a third optional parameter that enhances the usage when dealing with events registerd on Fathom (more on this later).
 
 ```ts
-import * as Fathom from "@guerrap/use-fathom-client";
+import * as Fathom from "@guerrap/fathom-client";
 
 Fathom.initialize("FATHOM_SITE_ID", {
   src: "FATHOM_SCRIPT",
@@ -37,7 +37,7 @@ Fathom.initialize("FATHOM_SITE_ID", {
 After initializing, you can use the exported functions throughout your application:
 
 ```ts
-import * as Fathom from "@guerrap/use-fathom-client";
+import * as Fathom from "@guerrap/fathom-client";
 
 // Track a page view
 Fathom.trackPageview();
@@ -94,7 +94,7 @@ Once the events have been synchronized, the `prepare-fathom` script proceeds to 
 After all events have been synchronized and the code has been generated, Fathom can be initialized with the `registeredEventsResolver`, which enables the `trackRegisteredGoal` function.
 
 ```ts
-import * as Fathom from "@guerrap/use-fathom-client";
+import * as Fathom from "@guerrap/fathom-client";
 import { registeredEventsResolver } from "./out/fathom/utilities";
 
 Fathom.initialize(
@@ -113,7 +113,7 @@ To import the `registeredEventsResolver`, simply reference the generated `utilit
 After initializing Fathom with this resolver (as shown in the example above), all exported functions can be used without issue, with the exception of `trackRegisteredGoal`. To use this function, you must first specify which events it should support.
 
 ```ts
-import * as Fathom from "@guerrap/use-fathom-client";
+import * as Fathom from "@guerrap/fathom-client";
 import { FathomRegisteredEventName } from "./out/fathom/types";
 
 // Track a registered goal
