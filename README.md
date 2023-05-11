@@ -69,12 +69,21 @@ Additionally, the script requires a configuration file named either `.fathomrc`,
 }
 ```
 
+With the `outDir` property
+
+```json
+{
+  "outDir": "out/fathom",
+  "events": ["CUSTOM_EVENT_NAME", "ANOTHER_CUSTOM_EVENT_NAME"]
+}
+```
+
 Once defined the script can be run by adding a dedicated entry to your `package.json`, like this:
 
 ```json
 {
   "scripts": {
-    "setup-fathom": "prepare-fathom out/mappings"
+    "setup-fathom": "prepare-fathom"
   }
 }
 ```
@@ -83,7 +92,7 @@ The `prepare-fathom` script is designed to ensure that the events defined in the
 
 ### Code generation
 
-Once the events have been synchronized, the `prepare-fathom` script proceeds to generate three files under the default `out/fathom` directory (if a custom directory is not specified when executing the command). These files will be located within the `src` directory:
+Once the events have been synchronized, the `prepare-fathom` script proceeds to generate three files under the default `out/fathom` directory (if a custom directory is not specified in the configuration file). These files will be located within the `src` directory:
 
 - `mappings.ts`: this file contains an array that includes all the registered events.
 - `types.ts`: type definitions about the registered events.

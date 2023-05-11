@@ -17,7 +17,7 @@ import { generateUtilities } from "./utils/generate-utilities.js";
  * @param siteId Site id of Fathom.
  * @param apiKey Authorization token of Fathom API.
  */
-const syncEvents = async (siteId, apiKey, outDir) => {
+const syncEvents = async (siteId, apiKey) => {
   try {
     if (!siteId) throw new Error("missing siteId");
     if (!apiKey) throw new Error("missing apiKey");
@@ -41,11 +41,11 @@ const syncEvents = async (siteId, apiKey, outDir) => {
     const configurationSpinner = ora();
     configurationSpinner.start("Reading configuration");
 
-    const configuration = await readFile(configurationPath, {
+    const configurationFile = await readFile(configurationPath, {
       encoding: "utf-8",
     });
-    const mappedEvents = JSON.parse(configuration).events;
-    if (!mappedEvents) {
+    const configuration = JSON.parse(configurationFile);
+    if (!configuration.events) {
       configurationSpinner.fail("Could not parse .fathom.json, malformed file");
       throw new Error("malformed .fathom.json file");
     }
@@ -61,7 +61,7 @@ const syncEvents = async (siteId, apiKey, outDir) => {
       const apiClient = new FathomRestClient(siteId, apiKey);
       const remoteEvents = await apiClient.getSiteEvents();
 
-      const eventsToCreate = mappedEvents
+      const eventsToCreate = configuration.events
         .filter((event) => !!event)
         .filter(
           (event) =>
@@ -83,6 +83,7 @@ const syncEvents = async (siteId, apiKey, outDir) => {
     const outputSpinner = ora();
     outputSpinner.start("Generating output files");
 
+    const outDir = configuration.outDir;
     const outputDirectory = outDir
       ? `${sourcePath}/${outDir.replaceAll(/(^\/+|\/+$)/g)}`
       : `${sourcePath}/out/fathom`;
@@ -105,6 +106,7 @@ const syncEvents = async (siteId, apiKey, outDir) => {
         configurationPath,
         JSON.stringify(
           {
+            ...configuration,
             events: syncedEvents.map((syncedEvent) => syncedEvent.name),
           },
           null,
@@ -124,8 +126,4 @@ const syncEvents = async (siteId, apiKey, outDir) => {
   }
 };
 
-syncEvents(
-  process.env.FATHOM_SITE_ID,
-  process.env.FATHOM_API_KEY,
-  process.argv[2]
-);
+syncEvents(process.env.FATHOM_SITE_ID, process.env.FATHOM_API_KEY);
