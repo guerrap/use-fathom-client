@@ -17,7 +17,12 @@ export const initialize = (siteId, options, registeredEventsResolver) => {
       return reject("site id missing");
     }
 
-    if (window.fathom) {
+    if (!!document.getElementById(siteId)) {
+      console.warn("fathom script already injected");
+      return resolve();
+    }
+
+    if (!!window.fathom) {
       console.warn("fathom already initialized");
       return resolve();
     }
@@ -60,6 +65,7 @@ export const initialize = (siteId, options, registeredEventsResolver) => {
     };
     script.defer = true;
     script.src = options.src;
+    script.id = siteId;
     document.head.appendChild(script);
   });
 };
