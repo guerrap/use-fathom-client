@@ -21,7 +21,7 @@
   "type": "module",
   "scripts": {},
   "bin": {
-    "prepare-fathom": "./src/scripts/sync-events.js"
+    "prepare-fathom": "./scripts/sync-events.js"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
@@ -31,7 +31,8 @@
   },
   "files": [
     "./src",
-    "./types"
+    "./types",
+    "./scripts"
   ],
   "engines": {
     "node": ">=14.16"

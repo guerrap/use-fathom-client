@@ -5,7 +5,7 @@ import ora from "ora";
 import { findUp } from "find-up";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import { generateTypes } from "./utils/generate-types.js";
-import { FathomRestClient } from "../clients/fathom-rest-client.js";
+import { FathomRestClient } from "../src/clients/fathom-rest-client.js";
 import { generateMappings } from "./utils/generate-mappings.js";
 import { generateUtilities } from "./utils/generate-utilities.js";
 
