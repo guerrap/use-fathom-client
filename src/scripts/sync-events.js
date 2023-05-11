@@ -27,10 +27,10 @@ const syncEvents = async (siteId, apiKey, outDir) => {
     locationSpinner.start("Locating configuration");
 
     const sourcePath = await findUp("src", { type: "directory" });
-    const configurationPath = await findUp(".fathom.json");
+    const configurationPath = await findUp([".fathomrc", ".fathomrc.json"]);
     if (!configurationPath) {
-      locationSpinner.fail("Could not locate .fathom.json");
-      throw new Error("missing .fathom.json file");
+      locationSpinner.fail("Could not locate a fathom configuration file");
+      throw new Error("missing fathom configuration file");
     }
 
     locationSpinner.succeed(
@@ -61,10 +61,12 @@ const syncEvents = async (siteId, apiKey, outDir) => {
       const apiClient = new FathomRestClient(siteId, apiKey);
       const remoteEvents = await apiClient.getSiteEvents();
 
-      const eventsToCreate = mappedEvents.filter(
-        (event) =>
-          !remoteEvents.find((remoteEvent) => remoteEvent.name === event)
-      );
+      const eventsToCreate = mappedEvents
+        .filter((event) => !!event)
+        .filter(
+          (event) =>
+            !remoteEvents.find((remoteEvent) => remoteEvent.name === event)
+        );
 
       const newSiteEvents = await apiClient.postSiteEvents(eventsToCreate);
       syncedEvents = [...remoteEvents, ...newSiteEvents];

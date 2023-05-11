@@ -61,7 +61,7 @@ FATHOM_SITE_ID=""
 FATHOM_API_KEY=""
 ```
 
-Additionally, the script requires a configuration file named `.fathom.json` as a starting point for the event definitions. This file should be in `JSON` format, placed in the root of your project, and should contain the desired event names.
+Additionally, the script requires a configuration file named either `.fathomrc`, or`.fathomrc.json` as a starting point for the event definitions. This file should be in `JSON` format, placed in the root of your project, and should contain the desired event names.
 
 ```json
 {
@@ -79,7 +79,7 @@ Once defined the script can be run by adding a dedicated entry to your `package.
 }
 ```
 
-The `prepare-fathom` script is designed to ensure that the events defined in the `.fathom.json` file are synchronized with those on the remote Fathom site. If any events are missing on the remote site, the script will create them automatically. On the other hand, if there are events that exist on the remote site but are not defined in the local mapping, the script will add them to the `.fathom.json` file. Once you run the `prepare-fathom` script, the `.fathom.json` file should be fully aligned with the remote site.
+The `prepare-fathom` script is designed to ensure that the events defined in the `.fathomrc` file are synchronized with those on the remote Fathom site. If any events are missing on the remote site, the script will create them automatically. On the other hand, if there are events that exist on the remote site but are not defined in the local mapping, the script will add them to the `.fathomrc` file. Once you run the `prepare-fathom` script, the `.fathomrc` file should be fully aligned with the remote site.
 
 ### Code generation
 
@@ -122,8 +122,8 @@ Fathom.trackRegisteredGoal<FathomRegisteredEventName>("", 0);
 
 To import the `FathomRegisteredEventName` mapping, simply reference the generated `types` file.
 
-With this mapping imported, you can now use the `Fathom.trackRegisteredGoal<T>` type, which supports all events defined in the `.fathom.json` file.
+With this mapping imported, you can now use the `Fathom.trackRegisteredGoal<T>` type, which supports all events defined in the configuration file.
 
 ## Delete an event
 
-Keep in mind that if you need to delete an event, you should first remove it from the Fathom dashboard, then delete it from your local `.fathom.json` file and finally run `prepare-fathom`; if the event exists either locally or remotely, it will be syncronized.
+Keep in mind that if you need to delete an event, you should first remove it from the Fathom dashboard, then delete it from your local configuration file and finally run `prepare-fathom`; if the event exists either locally or remotely, it will be syncronized.
