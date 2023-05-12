@@ -61,6 +61,8 @@ FATHOM_SITE_ID=""
 FATHOM_API_KEY=""
 ```
 
+If the required environment variables are not defined, the script will still function; however, it will skip the events synchronization process. Instead, it will only generate the output files to prevent any disruption to builds that depend on the generated output.
+
 Additionally, the script requires a configuration file named either `.fathomrc`, or`.fathomrc.json` as a starting point for the event definitions. This file should be in `JSON` format, placed in the root of your project, and should contain the desired event names.
 
 ```json
