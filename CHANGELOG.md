@@ -1,3 +1,17 @@
+## 1.2.0 (May 11, 2023)
+
+Features:
+
+- generate placeholder code when envs are missing
+
+Fixes:
+
+- avoid pushing commands to the local queue if fathom is never initialized
+
+Others:
+
+- add eslint config, husky, commit lint
+
 ## 1.1.0 (May 11, 2023)
 
 Features:
