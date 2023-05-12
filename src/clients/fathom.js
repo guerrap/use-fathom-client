@@ -27,6 +27,9 @@ export const initialize = (siteId, options, registeredEventsResolver) => {
       return resolve();
     }
 
+    window.__fathomCommandsQueueActive =
+      window.__fathomCommandsQueueActive || true;
+
     const script = document.createElement("script");
     script.setAttribute("data-site", siteId);
 
@@ -146,6 +149,7 @@ export const isTrackingEnabled = () => {
  * @param {*} command Supported command.
  */
 const scheduleCommand = (command) => {
+  if (!window.__fathomCommandsQueueActive) return;
   window.__fathomCommandsQueue = window.__fathomCommandsQueue || [];
   window.__fathomCommandsQueue.push(command);
 };
