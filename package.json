@@ -11,6 +11,7 @@
     "fathom",
     "client"
   ],
+  "type": "module",
   "types": "./types/use-fathom-client.d.ts",
   "exports": {
     ".": {
@@ -18,8 +19,12 @@
       "require": "./src/index.js"
     }
   },
-  "type": "module",
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint --ext .js ./src ./scripts",
+    "commitlint": "commitlint -e",
+    "format": "eslint --fix --ext .js ./src ./scripts && prettier --write .",
+    "prepare": "husky install"
+  },
   "bin": {
     "prepare-fathom": "./scripts/sync-events.js"
   },
@@ -29,6 +34,15 @@
     "node-fetch": "^3.3.1",
     "ora": "^6.3.0"
   },
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.8"
+  },
   "files": [
     "./src",
     "./types",
@@ -36,5 +50,8 @@
   ],
   "engines": {
     "node": ">=14.16"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
