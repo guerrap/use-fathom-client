@@ -9,6 +9,7 @@ import { FathomRestClient } from "../src/clients/fathom-rest-client.js";
 import { generateMappings } from "./utils/generate-mappings.js";
 import { generateUtilities } from "./utils/generate-utilities.js";
 import { generatePlaceholderCode } from "./utils/generate-placeholder-code.js";
+import { dirname } from "path";
 
 /**
  * Syncronize the local events with the Fathom remote site by creating any new
@@ -23,8 +24,8 @@ const syncEvents = async (siteId, apiKey) => {
   const locationSpinner = ora();
   locationSpinner.start("Locating configuration");
 
-  const sourcePath = await findUp("src", { type: "directory" });
   const configurationPath = await findUp([".fathomrc", ".fathomrc.json"]);
+  const sourceFolder = dirname(configurationPath);
   if (!configurationPath) {
     locationSpinner.fail("Could not locate a fathom configuration file");
     console.error("missing fathom configuration file");
@@ -52,8 +53,8 @@ const syncEvents = async (siteId, apiKey) => {
   // Output directory for the generated files
   const outDir = configuration.outDir;
   const outputDirectory = outDir
-    ? `${sourcePath}/${outDir.replaceAll(/(^\/+|\/+$)/g)}`
-    : `${sourcePath}/out/fathom`;
+    ? `${sourceFolder}/${outDir.replaceAll(/(^\/+|\/+$)/g)}`
+    : `${sourceFolder}/out/fathom`;
 
   // When the envs are missing, proceed to generate "empty" code
   if (!siteId || !apiKey) {
