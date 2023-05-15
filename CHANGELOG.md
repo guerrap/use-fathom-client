@@ -1,3 +1,9 @@
+## 1.3.0 (May 15, 2023)
+
+Features:
+
+- avoid scoping the output files under the `/src` folder
+
 ## 1.2.0 (May 11, 2023)
 
 Features:
