@@ -1,3 +1,9 @@
+## 1.3.1 (May 15, 2023)
+
+Fixes:
+
+- check if the configuration root path exists before `dirname`
+
 ## 1.3.0 (May 15, 2023)
 
 Features:
