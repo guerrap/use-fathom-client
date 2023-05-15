@@ -25,7 +25,6 @@ const syncEvents = async (siteId, apiKey) => {
   locationSpinner.start("Locating configuration");
 
   const configurationPath = await findUp([".fathomrc", ".fathomrc.json"]);
-  const sourceFolder = dirname(configurationPath);
   if (!configurationPath) {
     locationSpinner.fail("Could not locate a fathom configuration file");
     console.error("missing fathom configuration file");
@@ -51,6 +50,7 @@ const syncEvents = async (siteId, apiKey) => {
   configurationSpinner.succeed("Configuration parsed");
 
   // Output directory for the generated files
+  const sourceFolder = dirname(configurationPath);
   const outDir = configuration.outDir;
   const outputDirectory = outDir
     ? `${sourceFolder}/${outDir.replaceAll(/(^\/+|\/+$)/g)}`
