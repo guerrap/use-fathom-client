@@ -1,3 +1,9 @@
+## 1.3.2 (June 08, 2023)
+
+Fixes:
+
+- add explicit typescript type annotation to imports
+
 ## 1.3.1 (May 15, 2023)
 
 Fixes:
