@@ -25,6 +25,12 @@ export class FathomRestClient {
             headers,
           }
         );
+        
+        if (!response.ok) {
+          console.error("could not get site events from fathom", await response.text());
+          process.exit(1);
+        }
+        
         const responseJson = await response.json();
 
         if (responseJson.has_more)
@@ -65,6 +71,11 @@ export class FathomRestClient {
             }),
           }
         );
+
+        if (!response.ok) {
+          console.error("could not post site events to fathom", await response.text());
+          process.exit(1);
+        }
 
         const jsonResponse = await response.json();
         return jsonResponse;
