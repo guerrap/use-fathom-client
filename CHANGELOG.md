@@ -1,3 +1,9 @@
+## 1.3.3 (July 07, 2023)
+
+Features:
+
+- improve error handling on fathom api calls
+
 ## 1.3.2 (June 08, 2023)
 
 Fixes:
